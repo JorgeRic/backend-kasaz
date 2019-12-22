@@ -31,14 +31,16 @@ const houseSchema = new Schema({
   },
   meters: {
     type: Number
+  },
+  city: {
+    type: String,
+  },
+  address: {
+    type: String
+  },
+  important:{
+    type: Boolean
   }
-  // city: {
-  //   type: String,
-  //   enum: ['Alicante','San Vicente','San Juan','Campello','El Altet','Agost']
-  // },
-  // address: {
-  //   type: String
-  // },
   // lat: {
   //   type: String
   // },

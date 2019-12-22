@@ -9,11 +9,8 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const cors = require('cors');
-
-
 require('dotenv').config();
 
-const basedRouter = require('./routes/based')
 const auth = require('./routes/auth');
 const apiRouter = require('./routes/api');
 
@@ -28,24 +25,15 @@ mongoose.connect(process.env.MONGODB_URI, {
   .catch(error => {
     console.error(error);
   });
-  
-  const app = express();
-  
-  app.use(
-    cors({
-      credentials: true,
-      origin: [process.env.PUBLIC_DOMAIN]
-    })
-    );
-    
-    
-    // app.use((req, res, next) => {
-    //   res.setHeader('Access-Control-Allow-Origin', process.env.PUBLIC_DOMAIN);
-    //   res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,OPTIONS,DELETE');
-    //   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    //   res.setHeader('Access-Control-Allow-Credentials', true);
-    //   next();
-    // });
+
+const app = express();
+
+app.use(
+  cors({
+    credentials: true,
+    origin: [process.env.PUBLIC_DOMAIN]
+  })
+);
 
 app.use(
   session({
@@ -68,14 +56,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-
 app.use('/auth', auth);
-<<<<<<< HEAD
 app.use('/api', apiRouter);
-=======
-app.use('/based', basedRouter)
->>>>>>> 105572ead4ed779a7d60eedcbeec713b795c2f92
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

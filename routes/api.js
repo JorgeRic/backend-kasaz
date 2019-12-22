@@ -5,8 +5,10 @@ const router = express.Router();
 const HousesDB = require('../models/House');
 
 router.get('/houses', async (req, res, next) => {
-
+  // const page_num = req.query.page_num;
+  // const per_page = requ.query.per_page;
   try {
+
     let listOfHouses = await HousesDB.find().limit(5).skip(0).sort({price: 1})
     let numHouses = await HousesDB.find().count()
     res.json({listOfHouses, numHouses});
@@ -35,26 +37,26 @@ router.post('/houses/new', async (req, res, next) => {
 //   }
 // });
 
-// router.put('/houses/:id/update', async (req, res, next) => {
-//   const { id } = req.params;
-//   const hoseupdated = req.body;
-//   try {
-//     const updated = await HousesDB.findByIdAndUpdate(id, hoseupdated, { new: true });
-//     res.status(200).json(updated);
-//   } catch (error) {
-//     next(error);
-//   }
-// });
+router.put('/houses/:id/update', async (req, res, next) => {
+  const { id } = req.params;
+  const hoseupdated = req.body;
+  try {
+    const updated = await HousesDB.findByIdAndUpdate(id, hoseupdated, { new: true });
+    res.status(200).json(updated);
+  } catch (error) {
+    next(error);
+  }
+});
 
-// router.delete('/houses/:id/delete', async (req, res, next) => {
-//   const { id } = req.params;
-//   try {
-//     await HousesDB.findByIdAndDelete(id);
-//     res.status(200).json({ message: 'Vivienda eliminada' });
-//   } catch (error) {
-//     next(error);
-//   }
-// });
+router.delete('/houses/:id/delete', async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    await HousesDB.findByIdAndDelete(id);
+    res.status(200).json({ message: 'Vivienda eliminada' });
+  } catch (error) {
+    next(error);
+  }
+});
 
 router.get('/houses/:id/details', async (req, res, next) => {
   const { id } = req.params;
