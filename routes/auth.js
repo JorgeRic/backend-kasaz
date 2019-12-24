@@ -27,7 +27,6 @@ router.post(
 
     try {
       const user = await User.findOne({ username });
-      console.log(user, "hggkgk")
       if (!user) {
         next(createError(404));
         console.log(user, " no exist")

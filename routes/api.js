@@ -27,16 +27,6 @@ router.post('/houses/new', async (req, res, next) => {
   }
 });
 
-// router.post('/houses/view', async (req, res, next) => {
-//   try {
-//     const newView = req.body;
-//     const showView = await HousesDB.findOne(newView);
-//     res.status(200).json(showView);
-//   } catch (error) {
-//     next(error);
-//   }
-// });
-
 router.put('/houses/:id/update', async (req, res, next) => {
   const { id } = req.params;
   const hoseupdated = req.body;
