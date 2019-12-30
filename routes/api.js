@@ -5,11 +5,14 @@ const router = express.Router();
 const HousesDB = require('../models/House');
 
 router.get('/houses', async (req, res, next) => {
-  // const page_num = req.query.page_num;
-  // const per_page = requ.query.per_page;
+  const page = parseInt(req.query.page)
+  const per_page = parseInt(req.query.per_page);
+  const skip = per_page * (page - 1)
+  console.log(req.query, [page, per_page, skip])
+
   try {
 
-    let listOfHouses = await HousesDB.find().limit(5).skip(0).sort({price: 1})
+    let listOfHouses = await HousesDB.find().limit(per_page).skip(skip).sort({price: 1})
     let numHouses = await HousesDB.find().count()
     res.json({listOfHouses, numHouses});
   } catch (error) {

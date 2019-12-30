@@ -40,13 +40,13 @@ const houseSchema = new Schema({
   },
   important:{
     type: Boolean
+  },
+  lat: {
+    type: String
+  },
+  long: {
+    type: String
   }
-  // lat: {
-  //   type: String
-  // },
-  // long: {
-  //   type: String
-  // }
 
 });
 
